@@ -19,16 +19,16 @@ jobs:
           terraform_version: 1.3.0
 
       - name: Terraform Init
-        run: terraform init ./s3-bucket
+        run: terraform -chdir=./infra/s3-bucket init
 
       - name: Terraform Validate
-        run: terraform validate ./s3-bucket
+        run: terraform -chdir=./infra/s3-bucket validate
 
       - name: Terraform Plan
-        run: terraform plan ./s3-bucket
+        run: terraform -chdir=./infra/s3-bucket plan
 
       - name: Terraform Apply
-        run: terraform apply -auto-approve ./s3-bucket
+        run: terraform -chdir=./infra/s3-bucket apply -auto-approve
         env:
           TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           TF_VAR_aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
